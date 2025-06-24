@@ -1,0 +1,24 @@
+- name: Установка nginx и применение шаблона конфигурации
+  hosts: all
+  become: yes
+  vars:
+    nginx_port: 8080
+    inventory_hostname: "hui"
+  tasks:
+    - name: Установка nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Применение конфигурации через шаблон
+      template:
+        src: /ansible/templates/nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+      notify: Перезапуск nginx
+
+  handlers:
+    - name: Перезапуск nginx
+      service:
+        name: nginx
+        state: restarted

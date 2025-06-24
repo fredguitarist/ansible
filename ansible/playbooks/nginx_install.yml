@@ -1,0 +1,17 @@
+- name: Установка и запуск nginx
+  hosts: group1, group2
+  become: yes
+
+  tasks:
+    - name: Установка nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Убедиться, что nginx запущен и включён
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+#это плейбук

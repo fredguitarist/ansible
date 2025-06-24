@@ -1,0 +1,17 @@
+- name: Демонстрация handler'а
+  hosts: group1
+  become: yes #стать типо рутом
+
+  tasks:
+    - name: Копируем конфиг
+      copy:
+        src: ./nginx.conf
+        dest: /etc/nginx/nginx.conf
+        backup: yes
+      notify: Перезапустить nginx
+
+  handlers:
+    - name: Перезапустить nginx
+      service:
+        name: nginx
+        state: restarted
