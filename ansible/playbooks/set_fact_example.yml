@@ -1,0 +1,28 @@
+- name: Установка nginx и применение шаблона конфигурации
+  hosts: group1
+  become: yes
+  vars:
+    nginx_port: "{{ nginx_port | default(80) }}"
+
+  tasks:
+    - name: Установить nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Установить сообщение
+      set_fact:
+        nginx_message: "Hello from {{ inventory_hostname }}!"
+
+    - name: Применение конфигурации через шаблон
+      template:
+        src: templates/nginx.conf.j2
+        dest: /etc/nginx/nginx.conf
+      notify: Перезапуск nginx
+
+  handlers:
+    - name: Перезапуск nginx
+      service:
+        name: nginx
+        state: restarted

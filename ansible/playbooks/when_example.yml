@@ -1,0 +1,22 @@
+- name: Пример использования директивы when
+  hosts: all
+  become: yes
+  tasks:
+
+    - name: Установить curl только на node1, node2, node3
+      apt:
+        name: curl
+        state: present
+        update_cache: yes
+      when: inventory_hostname in ["node1", "node2", "node3"]
+
+    - name: Показать версию curl (только на нужных узлах)
+      command: curl --version
+      register: curl_version
+      changed_when: false
+      when: inventory_hostname in ["node1", "node2", "node3"]
+
+    - name: Вывести версию curl
+      debug:
+        var: curl_version.stdout_lines
+      when: inventory_hostname in ["node1", "node2", "node3"]

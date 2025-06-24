@@ -2,6 +2,7 @@ services:
   ansible:
     build: ./ansible
     container_name: ansible
+    restart: always
     volumes:
       - ./ansible:/ansible
     working_dir: /ansible
@@ -21,53 +22,62 @@ services:
   node1:
     image: rastasheep/ubuntu-sshd:18.04
     container_name: node1
+    restart: always
     environment:
       - ROOT_PASSWORD=root
 
   node2:
     image: rastasheep/ubuntu-sshd:18.04
     container_name: node2
+    restart: always
     environment:
       - ROOT_PASSWORD=root
 
   node3:
     image: rastasheep/ubuntu-sshd:18.04
     container_name: node3
+    restart: always
     environment:
       - ROOT_PASSWORD=root
  
   node4:
     image: rastasheep/ubuntu-sshd:18.04
     container_name: node4
+    restart: always
     environment:
       - ROOT_PASSWORD=root
 
   node5:
     image: rastasheep/ubuntu-sshd:18.04
     container_name: node5
+    restart: always
     environment:
       - ROOT_PASSWORD=root
 
   node6:
     image: rastasheep/ubuntu-sshd:18.04
     container_name: node6
+    restart: always
     environment:
       - ROOT_PASSWORD=root
 
   node7:
     image: rastasheep/ubuntu-sshd:18.04
     container_name: node7
+    restart: always
     environment:
       - ROOT_PASSWORD=root
 
   node8:
     image: rastasheep/ubuntu-sshd:18.04
     container_name: node8
+    restart: always
     environment:
       - ROOT_PASSWORD=root
 
   node9:
     image: rastasheep/ubuntu-sshd:18.04
     container_name: node9
+    restart: always
     environment:
       - ROOT_PASSWORD=root
